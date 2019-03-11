@@ -4,7 +4,13 @@
   "description": "React Node Express Example Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "start": "npm run build && node src/server/index.js",
+    "server-start": "nodemon src/server/index.js",
+    "client-start": "cross-env cd src\\client && react-scripts start",
+    "client-build": "cross-env cd src\\client && react-scripts build",
+    "client-test": "cross-env cd src\\client && react-scripts test",
+    "dev-start": "concurrently \"npm run server-start\" \"npm run client-start\""
   },
   "repository": {
     "type": "git",
@@ -28,5 +34,14 @@
   "bugs": {
     "url": "https://github.com/gdmgent-1819-mobdev2/r-node-express/issues"
   },
-  "homepage": "https://github.com/gdmgent-1819-mobdev2/r-node-express#readme"
+  "homepage": "https://github.com/gdmgent-1819-mobdev2/r-node-express#readme",
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "nodemon": "^1.18.10"
+  },
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-scripts": "2.1.8"
+  }
 }
