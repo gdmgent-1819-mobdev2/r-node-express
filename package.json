@@ -1,0 +1,32 @@
+{
+  "name": "r-node-express",
+  "version": "1.0.0",
+  "description": "React Node Express Example Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdmgent-1819-mobdev2/r-node-express.git"
+  },
+  "keywords": [
+    "react",
+    "node",
+    "express",
+    "momgodb",
+    "api",
+    "redux",
+    "sass",
+    "react-native",
+    "expo",
+    "jest",
+    "nmd"
+  ],
+  "author": "Philippe De Pauw - Waterschoot",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gdmgent-1819-mobdev2/r-node-express/issues"
+  },
+  "homepage": "https://github.com/gdmgent-1819-mobdev2/r-node-express#readme"
+}
