@@ -1,16 +1,13 @@
 {
   "name": "r-node-express",
   "version": "1.0.0",
-  "description": "React Node Express Example Project",
+  "description": "Node Express with React Client Example Project",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "start": "npm run build && node src/server/index.js",
-    "server-start": "nodemon src/server/index.js",
-    "client-start": "cross-env cd src\\client && react-scripts start",
-    "client-build": "cross-env cd src\\client && react-scripts build",
-    "client-test": "cross-env cd src\\client && react-scripts test",
-    "dev-start": "concurrently \"npm run server-start\" \"npm run client-start\""
+    "server-start": "nodemon --exec babel-node src/server/index.js",
+    "app-start": "concurrently \"npm run server-start\""
   },
   "repository": {
     "type": "git",
@@ -36,12 +33,18 @@
   },
   "homepage": "https://github.com/gdmgent-1819-mobdev2/r-node-express#readme",
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.4",
     "cross-env": "^5.2.0",
+    "joi": "^14.3.1",
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "http": "^0.0.0",
+    "https": "^1.0.0"
   }
 }
