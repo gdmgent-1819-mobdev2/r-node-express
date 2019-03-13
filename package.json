@@ -4,9 +4,7 @@
   "description": "Node Express with React Client Example Project",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "start": "npm run build && node src/server/index.js",
-    "server-start": "nodemon --exec babel-node src/server/index.js",
+    "server-start": "nodemon src/server/index.js --exec babel-node",
     "app-start": "concurrently \"npm run server-start\""
   },
   "repository": {
@@ -42,6 +40,7 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "http": "^0.0.0",
