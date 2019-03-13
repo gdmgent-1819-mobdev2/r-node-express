@@ -3,7 +3,15 @@ import config from './config';
 
 import http from 'http';
 import https from 'https';
+/*
+Fast, unopinionated, minimalist web framework for node.
+https://www.npmjs.com/package/express
+*/
 import express from 'express';
+/*
+Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+https://www.npmjs.com/package/body-parser
+*/
 import bodyParser from 'body-parser';
 
 // Import the router from api/v1
@@ -22,6 +30,6 @@ app.use('/api/v1', apiV1Router)
 const httpServer = http.Server(app);
 
 // Launch the HTTP-server
-httpServer.listen(config.nodePort, () => {
+httpServer.listen(config.nodePort, config.nodeHostname, () => {
   console.log(`Node server running at http://${config.nodeHostname}:${config.nodePort}/!`)
 });
