@@ -8,17 +8,27 @@ Fast, unopinionated, minimalist web framework for node.
 https://www.npmjs.com/package/express
 */
 import express from 'express';
+
 /*
 Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 https://www.npmjs.com/package/body-parser
 */
 import bodyParser from 'body-parser';
 
+/*
+HTTP request logger middleware for node.js
+https://www.npmjs.com/package/morgan
+https://github.com/expressjs/morgan
+*/
+import morgan from 'morgan';
+
 // Import the router from api/v1
 import apiV1Router from './api/v1/routes'
 
 // Create the Express App
 const app = express();
+// Use morgan
+app.use(morgan('combined'));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));

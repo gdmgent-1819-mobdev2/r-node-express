@@ -1,5 +1,5 @@
-import * as nmdController from './nmdController'
+import NMDController from './nmd.controller'
 
 export {
-    nmdController
+    NMDController
 }
