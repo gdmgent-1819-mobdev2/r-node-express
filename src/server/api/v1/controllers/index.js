@@ -1,5 +1,5 @@
-import NMDController from './nmd.controller'
+import TechnologyController from './technology.controller'
 
 export {
-    NMDController
+    TechnologyController
 }

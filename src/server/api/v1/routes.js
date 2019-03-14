@@ -1,22 +1,22 @@
 // Import the necessary libraries
 import express from 'express';
 
-import { NMDController } from './controllers';
+import { TechnologyController } from './controllers';
 
 // Make instances of the controllers
-const nmdController = new NMDController();
+const technologyController = new TechnologyController();
 
 // Define an express router
 const apiV1Router = express.Router();
 
 // Define the routes
-apiV1Router.get('/nmd', nmdController.index)
-apiV1Router.get('/nmd/:id', nmdController.show)
-apiV1Router.get('/nmd/create', nmdController.create)
-apiV1Router.post('/nmd', nmdController.store)
-apiV1Router.get('/nmd/:id/edit', nmdController.edit)
-apiV1Router.put('/nmd/:id', nmdController.update)
-apiV1Router.delete('/nmd/:id', nmdController.destroy)
+apiV1Router.get('/technologies', technologyController.index)
+apiV1Router.get('/technologies/:id', technologyController.show)
+apiV1Router.get('/technologies/create', technologyController.create)
+apiV1Router.post('/technologies', technologyController.store)
+apiV1Router.get('/technologies/:id/edit', technologyController.edit)
+apiV1Router.put('/technologies/:id', technologyController.update)
+apiV1Router.delete('/technologies/:id', technologyController.destroy)
 
 // Export the router
 export default apiV1Router;
