@@ -21,6 +21,7 @@ dotenv.config();
 // Create a Joi-schema for dotenv
 const envVarsSchema = Joi.object({
   NMD_BASELINE: Joi.string().required(),
+  NODE_ENV: Joi.string().default('Development'),
   NODE_SERVER_HOSTNAME: Joi.string().default('127.0.0.1'),
   NODE_SERVER_PORT: Joi.number().default(8080)
 }).unknown().required();
@@ -34,6 +35,7 @@ if (error) {
 // Create Configuration object
 const config = {
   nmdBaseline: envVars.NMD_BASELINE,
+  nodeEnv: envVars.NODE_ENV,
   nodeHostname: envVars.NODE_SERVER_HOSTNAME,
   nodePort: envVars.NODE_SERVER_PORT,
 };
