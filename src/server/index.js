@@ -1,6 +1,8 @@
 // Import the configuration: early as possible
 import config from './config';
 
+import path from 'path';
+
 import http from 'http';
 import https from 'https';
 /*
@@ -27,6 +29,10 @@ import apiV1Router from './api/v1/routes'
 
 // Create the Express App
 const app = express();
+// Set the default views directory to html folder
+app.set('views', path.join(__dirname, 'views'));
+// Set the view engine to ejs
+app.set('view engine', 'ejs')
 // Use morgan
 app.use(morgan('combined'));
 // Load body parser for parsing JSON in requests
@@ -35,6 +41,36 @@ app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
 
 // Use the router from api/v1
 app.use('/api/v1', apiV1Router)
+
+// Last route is 404
+app.use((req, res, next) => {
+  let error = new Error('Not Found');
+  error.status = 404;
+  next(error);
+});
+
+// Application Error Handling
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  const obj = {
+    error: {
+      message: error.message,
+      status: error.status,
+      timestamp: new Date().getTime()
+    }
+  }
+
+  if(req.xhr){
+    res.json(obj);
+  } else {
+    if(error.status === 404) {
+      res.render('404', obj) 
+    } else {
+      res.render('error', obj)
+    }
+  }
+
+});
 
 // Create an HTTP-server with Express injected
 const httpServer = http.Server(app);
