@@ -1,4 +1,4 @@
-@import "../atoms/variables.css";
+@import "./variables.css";
 
 body {
     background: var(--color-purple);

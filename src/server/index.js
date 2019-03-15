@@ -12,6 +12,11 @@ https://www.npmjs.com/package/express
 import express from 'express';
 
 /*
+Cors
+*/
+import cors from 'cors';
+
+/*
 Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
 https://www.npmjs.com/package/body-parser
 */
@@ -33,8 +38,18 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
-// Use morgan
+// Static resources (CSS, JavaScript, Icons, Images, ...). Serve it in virtual directory static
+app.use('/static', express.static(path.join(__dirname, 'assets')))
+// Use morgan only for development
 app.use(morgan('combined'));
+// Cors Options
+const corsOption = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
+app.use(cors(corsOption));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
