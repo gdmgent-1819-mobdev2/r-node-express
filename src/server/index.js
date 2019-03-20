@@ -3,6 +3,10 @@ import config from './config';
 
 import path from 'path';
 
+/*
+Http-server
+Https-server
+*/
 import http from 'http';
 import https from 'https';
 /*
@@ -15,6 +19,12 @@ import express from 'express';
 Cors
 */
 import cors from 'cors';
+const corsOptions = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token']
+};
 
 /*
 Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
@@ -42,14 +52,8 @@ app.set('view engine', 'ejs')
 app.use('/static', express.static(path.join(__dirname, 'assets')))
 // Use morgan only for development
 app.use(morgan('combined'));
-// Cors Options
-const corsOption = {
-  origin: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  exposedHeaders: ['x-auth-token']
-};
-app.use(cors(corsOption));
+// Use Cors options
+app.use(cors(corsOptions));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
