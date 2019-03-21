@@ -5,12 +5,10 @@ let technologies = mockTechnologies;
 
 class TechnologyController {
     constructor() {
-
     }
 
     // List all the models
     index = (req, res, next) => {
-        console.log(technologies);
         return res.json(technologies);
     }
 
@@ -25,6 +23,10 @@ class TechnologyController {
 
     // ViewModel for Insert / Create
     create = (req, res, next) => {
+        
+        const item = technologies.find((obj) => {
+            return obj.name = id;
+        });
         throw new Error('Not implemented yet!');
     }
 
