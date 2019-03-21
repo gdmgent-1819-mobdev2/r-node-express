@@ -3,10 +3,6 @@ import config from './config';
 
 import path from 'path';
 
-/*
-Http-server
-Https-server
-*/
 import http from 'http';
 import https from 'https';
 /*
@@ -14,17 +10,6 @@ Fast, unopinionated, minimalist web framework for node.
 https://www.npmjs.com/package/express
 */
 import express from 'express';
-
-/*
-Cors
-*/
-import cors from 'cors';
-const corsOptions = {
-  origin: true,
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  exposedHeaders: ['x-auth-token']
-};
 
 /*
 Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
@@ -44,16 +29,14 @@ import apiV1Router from './api/v1/routes'
 
 // Create the Express App
 const app = express();
-// Set the default views directory to html folder
+// Set the default views directory to views folder
 app.set('views', path.join(__dirname, 'views'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
-// Static resources (CSS, JavaScript, Icons, Images, ...). Serve it in virtual directory static
-app.use('/static', express.static(path.join(__dirname, 'assets')))
-// Use morgan only for development
+// Use morgan
 app.use(morgan('combined'));
-// Use Cors options
-app.use(cors(corsOptions));
+// Set the assets folder as static
+app.use('static', path.join(__dirname, 'views'));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
