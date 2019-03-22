@@ -24,25 +24,36 @@ https://github.com/expressjs/morgan
 */
 import morgan from 'morgan';
 
+import mongoose from 'mongoose';
+
 // Import the router from api/v1
 import apiV1Router from './api/v1/routes'
 
+/*
+Mongoose (MongoDb-port)
+*/
+const mongoDbConnectionString = config.mongoDbConnection;
+mongoose.connect(mongoDbConnectionString, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDb Cconnection error!'));
+
 // Create the Express App
 const app = express();
+// Use morgan
+app.use(morgan('combined'));
 // Set the default views directory to views folder
 app.set('views', path.join(__dirname, 'views'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
-// Use morgan
-app.use(morgan('combined'));
 // Set the assets folder as static
-app.use('static', path.join(__dirname, 'views'));
+app.use('static', express.static(path.join(__dirname, 'views')));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
 
 // Use the router from api/v1
-app.use('/api/v1', apiV1Router)
+app.use('/api/v1', apiV1Router);
 
 // Last route is 404
 app.use((req, res, next) => {

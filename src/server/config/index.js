@@ -23,7 +23,8 @@ const envVarsSchema = Joi.object({
   NMD_BASELINE: Joi.string().required(),
   NODE_ENV: Joi.string().default('Development'),
   NODE_SERVER_HOSTNAME: Joi.string().default('127.0.0.1'),
-  NODE_SERVER_PORT: Joi.number().default(8080)
+  NODE_SERVER_PORT: Joi.number().default(8080),
+  MONGODB_CONNECTION: Joi.string().required()
 }).unknown().required();
 
 // Validate the dotenv via Joi
@@ -38,6 +39,7 @@ const config = {
   nodeEnv: envVars.NODE_ENV,
   nodeHostname: envVars.NODE_SERVER_HOSTNAME,
   nodePort: envVars.NODE_SERVER_PORT,
+  mongoDbConnection: envVars.MONGODB_CONNECTION,
 };
 
 // Export it for use in other modules / files
