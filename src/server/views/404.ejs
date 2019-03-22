@@ -6,11 +6,11 @@
     <body>
         <div class="container">
             <div class="row">
-                <h1>404</h1>
+                <h1><%= error.status %></h1>
             </div>
             <hr>
             <div class="row">
-                <p style="height:300px;">Content Here...</p>
+                <p style="height:300px;"><%= error.message %></p>
             </div>
         </div>
     </body>

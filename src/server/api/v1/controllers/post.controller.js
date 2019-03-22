@@ -1,31 +1,38 @@
 import uuidv4 from 'uuid/v4';
-import * as mockTechnologies from '../mocks/technologies';
+import { handleAPIError } from '../utilities/errorHandler';
+import * as mockPosts from '../mocks/posts';
 
-let technologies = mockTechnologies;
+let posts = mockPosts.posts;
 
-class TechnologyController {
+class PostController {
     constructor() {
     }
 
     // List all the models
     index = (req, res, next) => {
-        return res.json(technologies);
+        if(posts === undefined || posts === null) {
+            handleAPIError(404, `Posts are not defined!`, next)
+        }
+        return res.json(posts);
     }
 
     // Show a specific model
     show = (req, res, next) => {
         const id = req.params.id;
-        const item = technologies.find((obj) => {
-            return obj.id = id;
+        const item = posts.find((obj) => {
+            return obj.id == id;
         });
+        if(item === undefined) {
+            handleAPIError(404, `Post with id: ${id} not found!`, next)
+        }
         return res.json(item);
     }
 
     // ViewModel for Insert / Create
     create = (req, res, next) => {
         
-        const item = technologies.find((obj) => {
-            return obj.name = id;
+        const item = posts.find((obj) => {
+            return obj.name == id;
         });
         throw new Error('Not implemented yet!');
     }
@@ -53,9 +60,9 @@ class TechnologyController {
     // Delete / Destroy the model
     destroy = (req, res, next) => {  
         const id = req.params.id;      
-        technologies = technologies.filter(item => item.id !== id);
+        posts = posts.filter(item => item.id !== id);
         return res.json({ 'message': 'ok '});
     }
 }
 
-export default TechnologyController;
+export default PostController;

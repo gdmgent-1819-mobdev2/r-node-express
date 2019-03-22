@@ -1,5 +1,5 @@
-import TechnologyController from './technology.controller'
+import PostController from './post.controller'
 
 export {
-    TechnologyController
+    PostController
 }

@@ -23,6 +23,7 @@ https://www.npmjs.com/package/morgan
 https://github.com/expressjs/morgan
 */
 import morgan from 'morgan';
+import chalk from 'chalk';
 
 import mongoose from 'mongoose';
 
@@ -36,18 +37,38 @@ const mongoDbConnectionString = config.mongoDbConnection;
 mongoose.connect(mongoDbConnectionString, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDb Cconnection error!'));
+db.on('error', console.error.bind(console, 'MongoDb Connection error!'));
+db.on('open', console.log.bind(console, 'MongoDb Connected!'));
+
+/*
+Morgan Middleware
+*/
+const morganMiddleware = morgan(function (tokens, req, res) {
+  return [
+      '\n',
+      chalk.hex('#ff4757').bold('🍄  Morgan --> '),
+      chalk.hex('#34ace0').bold(tokens.method(req, res)),
+      chalk.hex('#ffb142').bold(tokens.status(req, res)),
+      chalk.hex('#ff5252').bold(tokens.url(req, res)),
+      chalk.hex('#2ed573').bold(tokens['response-time'](req, res) + ' ms'),
+      chalk.hex('#f78fb3').bold('@ ' + tokens.date(req, res)),
+      chalk.yellow(tokens['remote-addr'](req, res)),
+      chalk.hex('#fffa65').bold('from ' + tokens.referrer(req, res)),
+      chalk.hex('#1e90ff')(tokens['user-agent'](req, res)),
+      '',
+  ].join(' ');
+});
 
 // Create the Express App
 const app = express();
-// Use morgan
-app.use(morgan('combined'));
+// Use morgan middelware
+app.use(morganMiddleware);
 // Set the default views directory to views folder
 app.set('views', path.join(__dirname, 'views'));
 // Set the view engine to ejs
 app.set('view engine', 'ejs')
 // Set the assets folder as static
-app.use('static', express.static(path.join(__dirname, 'views')));
+app.use('/static', express.static(path.join(__dirname, 'assets')));
 // Load body parser for parsing JSON in requests
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(bodyParser.json({ limit: '50mb', keepExtensions: true }));
