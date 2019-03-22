@@ -66,7 +66,7 @@ app.use(morganMiddleware);
 // Set the default views directory to views folder
 app.set('views', path.join(__dirname, 'views'));
 // Set the view engine to ejs
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 // Set the assets folder as static
 app.use('/static', express.static(path.join(__dirname, 'assets')));
 // Load body parser for parsing JSON in requests
